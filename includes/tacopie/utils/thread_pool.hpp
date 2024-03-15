@@ -38,7 +38,7 @@ namespace tacopie
     private:
         std::list<std::thread> m_workers;
         std::atomic<std::size_t> m_max_nb_threads = ATOMIC_VAR_INIT{};
-        std::atomic<std::size_t> m_nv_running_threads = ATOMIC_VAR_INIT{};
+        std::atomic<std::size_t> m_nb_running_threads = ATOMIC_VAR_INIT{};
         std::atomic<bool> m_should_stop = ATOMIC_VAR_INIT{};
         std::queue<task_t> m_tasks;
         std::mutex m_tasks_mtx;
