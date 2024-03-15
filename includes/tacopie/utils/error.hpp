@@ -1,7 +1,7 @@
 #pragma once
 
 #include <cstdint>
-#include <cstdexcept>
+#include <stdexcept>
 #include <string>
 
 #include <tacopie/utils/logger.hpp>
@@ -13,8 +13,8 @@ public:
     tacopie_error(std::string const& what, std::string const& file, std::size_t line);
     ~tacopie_error()=default;
 
-    tacopie_error(tacopie const&) = default;
-    tacopie_error& operator=(tacopie const&)=default;
+    tacopie_error(tacopie_error const&) = default;
+    tacopie_error& operator=(tacopie_error const&)=default;
 
 public:
     std::string const& get_file()const{return m_file;}
@@ -26,3 +26,9 @@ private:
 }; 
 
 }
+//! macro for convenience
+#define __TACOPIE_THROW(level, what)                          \
+  {                                                           \
+    __TACOPIE_LOG(level, (what));                             \
+    throw tacopie::tacopie_error((what), __FILE__, __LINE__); \
+  }
